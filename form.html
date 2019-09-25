@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+        img.bg {
+            min-height: 100%;
+            min-width: 1024px;
+            width: 100%;
+            height: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        
+        @media screen and (max-width: 1024px) {
+            img.bg {
+                left: 50%;
+                margin-left: -512px;
+            }
+        }
+        
+        .form-quote {
+            background: white;
+            padding: 10px;
+        }
+        
+        .header-form {
+            background: #474d52;
+            height: auto;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        
+        .header-form p {
+            color: white;
+            padding: 5px;
+        }
+        
+        .table {
+            background: #ffffffbd;
+            margin-top: 15px;
+            border-radius: 20px;
+            padding: 20px;
+        }
+        
+        tfoot {
+            background: black;
+            color: white;
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <img src="img/background.jpg" alt="bckgound" class="bg" />
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7"></div>
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="header-form">
+                    <p>Ingresa tus datos para realizar tu consulta:</p>
+                </div>
+                <form id="form-0" class="form text-left form-quote" onsubmit="sendData(this.id,event);return false">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="document">Documento</label>
+                        <input type="text" class="form-control" id="document" name="document" placeholder="Documento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cellPhone">Celular</label>
+                        <input type="number" class="form-control" id="cellPhone" name="cellPhone" placeholder="Celular" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ciudad</label>
+                        <select class="form-control" id="city" name="city" onchange="selectDealers(this.value);" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Concesionarios</label>
+                        <input type="text" class="form-control" id="dealers" name="dealers" placeholder="Concesionarios" required disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Dirección</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" required disabled>
+                    </div>
+                    <div class="btn-group mx-auto" role="group" aria-label="Basic example">
+                        <button type="submit" form="form-0" class="btn btn-primary">Continuar</button>
+
+                    </div>
+                </form>
+
+                <form id="form-1" class="form d-none text-left form-quote" onsubmit="sendData(this.id,event);return false">
+                    <div class="form-group">
+                        <label for="line">Línea</label>
+                        <select class="form-control" name="line" class="form-control" onchange="disabledObj('model')" id="line" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Modelo</label>
+                        <select class="form-control" name="model" class="form-control" onchange="disabledObj('km')" id="model" required disabled>
+                            <option value="">Seleccione</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="km">Km</label>
+                        <select class="form-control" name="km" class="form-control" id="km" onchange="calculateMP(this.value)" disabled required>
+
+                        </select>
+                    </div>
+                    <div class="btn-group mx-auto d-none" id="groudButton" role="group" aria-label="Basic example">
+                        <button type="button" onclick="back(0)" class="btn btn-secondary">Volver</button>
+                        <button type="submit" id="btnSendMail" form="form-1" class="btn btn-primary" disabled>Continuar</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+                <table class="table table-responsive table-hover d-none table-sm" id="table-result"></table>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="js/function.js"></script>
+    <script>
+        window.onload = loadView;
+    </script>
+</body>
+
+
+</html>
