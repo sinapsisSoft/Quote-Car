@@ -117,6 +117,26 @@ class BoQuote
         }
         return json_encode($this->arrayResult);
     }
+    public function sendQuote($name, $mail, $cellphone, $line, $km, $model, $doc, $city)
+    {
+        try {
+            $con = $this->objConntion->connect();
+            $con->query("SET NAMES 'utf8'");
+            if ($con != null) {
+                $srtQuery='CALL sp_mp_cost('.$line.','.$mp.')';
+                if ($result = $con->query($srtQuery)) {
+                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        $this->arrayResult[] = $row;
+                    };
+                    mysqli_free_result($result);
+                }
+            }
+            $con->close();
+        } catch (Exception $e) {
+            echo 'Exception captured: ', $e->getMessage(), "\n";
+        }
+        return json_encode($this->arrayResult);
+    }
 
 }
 $obj = new BoQuote();
@@ -152,6 +172,9 @@ if (isset($data->POST)) {
         echo $obj->selectMP($data->line,$data->mp);
     }
 
+}
+if ($data->POST == "CREATE") {
+    echo  $obj->sendQuote($data->name, $data->mail, $data->cellphone, $data->line, $data->km, $data->model, $data->doc, $data->city);
 }
 
 //echo $obj->selectMP(1,1);

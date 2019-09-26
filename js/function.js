@@ -24,8 +24,9 @@ function sendData(idForm, e) {
         loadViewKM();
     }
     if (idForm == "form-1") {
-
+        // if (sendQuote()) {
         sendMail();
+        // }
     }
     e.preventDefault();
 }
@@ -55,7 +56,7 @@ function calculateMP(id) {
 
 function sendMail() {
     try {
-        dataSetQuote = GET_JSON;
+        let dataSetQuote = '{"POST":"MAIL"' + GET_JSON;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "mail/notification.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
@@ -78,6 +79,34 @@ function sendMail() {
     }
 
 
+}
+
+function sendQuote() {
+
+    try {
+        let dataSetQuote = '{"POST":"CREATE"' + GET_JSON;
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "php/bo/bo_quote.php", true);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let json = JSON.parse(xhttp.responseText);
+                console.log(json);
+                if (xhttp.responseText != 0) {
+                    return true;
+                } else {
+
+                    return false;
+                }
+            }
+        }
+        xhttp.send(dataSetQuote);
+    } catch (error) {
+        console.error(error);
+        alert("Se presentó un error en el registro");
+        return false;
+    }
 }
 
 function loadViewPageCity() {
@@ -247,7 +276,7 @@ function createTable(json) {
     let objKm = document.getElementById("km");
     let km = objKm.options[objKm.selectedIndex].text;
     let model = document.getElementById("model").value;
-    let thead = '<label><h2>Resumen</h2></label><thead class="thead-light"><tr class="text-center"><th scope="col">#</th><th scope="col">Nombre</th><th scope="col">Correo</th><th scope="col">Celular</th><th scope="col">Dirección</th><th scope="col">Linea</th><th scope="col">Km</th><th scope="col">Modelo</th></tr></thead>';
+    let thead = '<label><h2>Resumen</h2></label><thead class="thead-light"><tr class="text-center"><th scope="col">#</th><th scope="col">Nombre</th><th scope="col">Correo</th><th scope="col">Celular</th><th scope="col">Concesionario</th><th scope="col">Linea</th><th scope="col">Km</th><th scope="col">Modelo</th></tr></thead>';
     tbody = '<tbody><tr><td>1</td>';
     tbody += '<td class="text-center">' + name + '</td>';
     tbody += '<td class="text-center">' + mail + '</td>';
@@ -268,7 +297,7 @@ function createTable(json) {
     $("#table-result").fadeIn("slow");
     $("#btnSendMail").prop("disabled", false);
     document.getElementById("table-result").innerHTML = thead + tbody + tfoot;
-    GET_JSON = '{"POST":"MAIL","name":"' + name + '","mail":"' + mail + '","cellphone":"' + cellphone + '","line":"' + line + '","km":"' + km + '","model":"' + model + '","doc":"' + doc + '","address":"' + address + '"}';
+    GET_JSON = '"name":"' + name + '","mail":"' + mail + '","cellphone":"' + cellphone + '","line":"' + line + '","km":"' + km + '","model":"' + model + '","doc":"' + doc + '","address":"' + address + '","city":"' + city + '"}';
 }
 
 function disabledObj(id) {

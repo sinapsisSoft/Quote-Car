@@ -1,4 +1,8 @@
 <?php
+    #Author: DIEGO CASALLAS
+    #Date: 26/09/2019
+    #Description : Is PDF Quote
+    include "../bo/bo_quote.php";
     require __DIR__.'/vendor/autoload.php';
     use Spipu\Html2Pdf\Html2Pdf;
     $htmlCode="<!DOCTYPE html>
