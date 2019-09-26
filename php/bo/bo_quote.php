@@ -23,7 +23,7 @@ class BoQuote
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                if ($result = $con->query("SELECT id_city,name_city FROM wp_city")) {
+                if ($result = $con->query("CALL sp_city()")) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;
                     };
@@ -43,7 +43,7 @@ class BoQuote
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                if ($result = $con->query("SELECT id_branch_office,name_branch_office, addres_branch_office FROM wp_branch_office")) {
+                if ($result = $con->query("CALL sp_branch_office()")) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;
                     };
@@ -65,7 +65,7 @@ class BoQuote
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                if ($result = $con->query("SELECT id_line,name_line FROM wp_line")) {
+                if ($result = $con->query("CALL sp_line()")) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;
                     };
@@ -84,7 +84,7 @@ class BoQuote
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                if ($result = $con->query("SELECT * FROM wp_mp")) {
+                if ($result = $con->query("CALL sp_mp()")) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;
                     };
@@ -103,12 +103,7 @@ class BoQuote
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                $srtQuery='SELECT name_article,cost_article_mp, LI.name_line, MP.name_mp FROM wp_article_mp AMP 
-                INNER JOIN wp_mp MP ON AMP.id_mp=MP.id_mp
-                INNER JOIN wp_line LI ON AMP.id_line=LI.id_line
-                INNER JOIN wp_article ART ON AMP.id_article= ART.id_article 
-                WHERE AMP.id_line='.$line.' AND AMP.id_mp='.$mp.' ORDER BY name_article ASC';
-
+                $srtQuery='CALL sp_mp_cost('.$line.','.$mp.')';
                 if ($result = $con->query($srtQuery)) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;

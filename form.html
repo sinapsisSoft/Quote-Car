@@ -61,10 +61,9 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <img src="img/background.jpg" alt="bckgound" class="bg" />
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-7 col-lg-7"></div>
             <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="header-form">
                     <p>Ingresa tus datos para realizar tu consulta:</p>
@@ -105,7 +104,7 @@
                     </div>
                 </form>
 
-                <form id="form-1" class="form d-none text-left form-quote" onsubmit="sendData(this.id,event);return false">
+                <form id="form-1" class="form d-none  text-left form-quote" onsubmit="sendData(this.id,event);return false">
                     <div class="form-group">
                         <label for="line">Línea</label>
                         <select class="form-control" name="line" class="form-control" onchange="disabledObj('model')" id="line" required>
@@ -149,9 +148,8 @@
 
             </div>
 
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 ">
+
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8 ">
                 <table class="table table-responsive table-hover d-none table-sm" id="table-result"></table>
             </div>
         </div>

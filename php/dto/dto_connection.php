@@ -9,10 +9,14 @@
     private $database;
 
     function __construct(){ 
-        $this->user="u725020941_WP";
+        /*$this->user="u725020941_WP";
         $this->password="Sinapsis2019*";
         $this->server="localhost";
-        $this->database="u725020941_WP";
+        $this->database="u725020941_WP";*/
+        $this->user="root";
+        $this->password="";
+        $this->server="localhost";
+        $this->database="u725020941_wp";
         }
         public function getUser()
         {
