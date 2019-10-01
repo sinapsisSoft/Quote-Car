@@ -123,7 +123,9 @@ class BoQuote
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                $srtQuery = 'CALL sp_mp_cost(' . $line . ',' . $km . ')';
+                $srtQuery="";
+                //Changes function 
+                //$srtQuery = 'CALL sp_mp_cost(' . $line . ',' . $km . ')';
                 if ($result = $con->query($srtQuery)) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;

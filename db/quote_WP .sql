@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2019 a las 19:29:17
+-- Tiempo de generación: 01-10-2019 a las 03:42:51
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -21,34 +21,43 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `u725020941_wp`
 --
+CREATE DATABASE IF NOT EXISTS `u725020941_wp` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `u725020941_wp`;
 
 DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE PROCEDURE `sp_branch_office` ()  BEGIN
+DROP PROCEDURE IF EXISTS `sp_branch_office`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_branch_office` ()  BEGIN
     SELECT id_branch_office,name_branch_office, addres_branch_office FROM wp_branch_office;
 END$$
 
-CREATE PROCEDURE `sp_city` ()  BEGIN
+DROP PROCEDURE IF EXISTS `sp_city`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_city` ()  BEGIN
     SELECT id_city,name_city FROM wp_city;
 END$$
 
-CREATE PROCEDURE `sp_create_quote` (IN `doc` VARCHAR(100), IN `model` VARCHAR(100), IN `name` VARCHAR(100), IN `mail` VARCHAR(100), IN `cellphone` VARCHAR(100), IN `line` INT, IN `mp` INT, IN `city` INT)  BEGIN
+DROP PROCEDURE IF EXISTS `sp_create_quote`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_create_quote` (IN `doc` VARCHAR(100), IN `model` VARCHAR(100), IN `name` VARCHAR(100), IN `mail` VARCHAR(100), IN `cellphone` VARCHAR(100), IN `line` INT, IN `mp` INT, IN `city` INT)  BEGIN
 	SET @code = (SELECT CONCAT('COT_',COUNT(*)+1) AS Quo_consec FROM wp_quote ORDER BY id_quote DESC LIMIT 0, 1);
     INSERT INTO wp_quote(name_client, mail_client, cellphone_client, id_line, id_mp, model_quote, document_client, code_quote, id_city) VALUES
-    (name,mail,cellphone,line,mp,model,doc,@code,city);      
+    (name,mail,cellphone,line,mp,model,doc,@code,city);
+    SELECT @code;
 END$$
 
-CREATE PROCEDURE `sp_line` ()  BEGIN
+DROP PROCEDURE IF EXISTS `sp_line`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_line` ()  BEGIN
   SELECT id_line,name_line FROM wp_line;
 END$$
 
-CREATE PROCEDURE `sp_mp` ()  BEGIN
+DROP PROCEDURE IF EXISTS `sp_mp`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mp` ()  BEGIN
   SELECT * FROM wp_mp;
 END$$
 
-CREATE PROCEDURE `sp_mp_cost` (IN `line` INT, IN `mp` INT)  BEGIN
+DROP PROCEDURE IF EXISTS `sp_mp_cost`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_mp_cost` (IN `line` INT, IN `mp` INT)  BEGIN
   SELECT name_article,cost_article_mp, LI.name_line, MP.name_mp FROM wp_article_mp AMP 
                 INNER JOIN wp_mp MP ON AMP.id_mp=MP.id_mp
                 INNER JOIN wp_line LI ON AMP.id_line=LI.id_line
@@ -64,6 +73,7 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `wp_article`
 --
 
+DROP TABLE IF EXISTS `wp_article`;
 CREATE TABLE IF NOT EXISTS `wp_article` (
   `id_article` int(11) NOT NULL AUTO_INCREMENT,
   `name_article` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -133,6 +143,7 @@ INSERT INTO `wp_article` (`id_article`, `name_article`, `id_type_article`, `id_u
 -- Estructura de tabla para la tabla `wp_article_mp`
 --
 
+DROP TABLE IF EXISTS `wp_article_mp`;
 CREATE TABLE IF NOT EXISTS `wp_article_mp` (
   `id_article_mp` int(11) NOT NULL AUTO_INCREMENT,
   `id_mp` int(11) NOT NULL,
@@ -150,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `wp_article_mp` (
 --
 
 INSERT INTO `wp_article_mp` (`id_article_mp`, `id_mp`, `id_article`, `id_line`, `cost_article_mp`) VALUES
-(1, 1, 31, 1, '75000'),
+(1, 1, 31, 1, '85000'),
 (2, 1, 34, 1, '16000'),
 (3, 1, 24, 1, '8000'),
 (4, 1, 26, 1, '45000'),
@@ -169,6 +180,7 @@ INSERT INTO `wp_article_mp` (`id_article_mp`, `id_mp`, `id_article`, `id_line`, 
 -- Estructura de tabla para la tabla `wp_branch_office`
 --
 
+DROP TABLE IF EXISTS `wp_branch_office`;
 CREATE TABLE IF NOT EXISTS `wp_branch_office` (
   `id_branch_office` int(11) NOT NULL,
   `name_branch_office` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -207,6 +219,7 @@ INSERT INTO `wp_branch_office` (`id_branch_office`, `name_branch_office`, `descr
 -- Estructura de tabla para la tabla `wp_city`
 --
 
+DROP TABLE IF EXISTS `wp_city`;
 CREATE TABLE IF NOT EXISTS `wp_city` (
   `id_city` int(11) NOT NULL AUTO_INCREMENT,
   `name_city` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -242,6 +255,7 @@ INSERT INTO `wp_city` (`id_city`, `name_city`, `description_city`) VALUES
 -- Estructura de tabla para la tabla `wp_line`
 --
 
+DROP TABLE IF EXISTS `wp_line`;
 CREATE TABLE IF NOT EXISTS `wp_line` (
   `id_line` int(11) NOT NULL AUTO_INCREMENT,
   `name_line` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -271,6 +285,7 @@ INSERT INTO `wp_line` (`id_line`, `name_line`, `description_line`) VALUES
 -- Estructura de tabla para la tabla `wp_mp`
 --
 
+DROP TABLE IF EXISTS `wp_mp`;
 CREATE TABLE IF NOT EXISTS `wp_mp` (
   `id_mp` int(11) NOT NULL AUTO_INCREMENT,
   `name_mp` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -309,6 +324,7 @@ INSERT INTO `wp_mp` (`id_mp`, `name_mp`) VALUES
 -- Estructura de tabla para la tabla `wp_quote`
 --
 
+DROP TABLE IF EXISTS `wp_quote`;
 CREATE TABLE IF NOT EXISTS `wp_quote` (
   `id_quote` int(11) NOT NULL AUTO_INCREMENT,
   `name_client` varchar(100) NOT NULL,
@@ -320,11 +336,21 @@ CREATE TABLE IF NOT EXISTS `wp_quote` (
   `document_client` varchar(20) NOT NULL,
   `code_quote` varchar(10) NOT NULL,
   `id_city` int(11) NOT NULL,
+  `date_quote` date NOT NULL,
   PRIMARY KEY (`id_quote`),
   KEY `city_quote` (`id_city`),
   KEY `line_quote` (`id_line`),
   KEY `mp_quote` (`id_mp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `wp_quote`
+--
+
+INSERT INTO `wp_quote` (`id_quote`, `name_client`, `mail_client`, `cellphone_client`, `id_line`, `id_mp`, `model_quote`, `document_client`, `code_quote`, `id_city`, `date_quote`) VALUES
+(1, 'Diego Casallas', 'diehercasvan@gmail.com', '3012528242', 1, 1, '2019', '80859867', 'COT_1', 2, '2019-09-29'),
+(2, 'Diego', 'diego@gmail.com', '12345678', 1, 1, '2019', '80859867', 'COT_2', 2, '0000-00-00'),
+(3, 'Diego', 'dieher@gmail.com', '2345678', 1, 1, '2020', '1234567890', 'COT_3', 3, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -332,6 +358,7 @@ CREATE TABLE IF NOT EXISTS `wp_quote` (
 -- Estructura de tabla para la tabla `wp_type_article`
 --
 
+DROP TABLE IF EXISTS `wp_type_article`;
 CREATE TABLE IF NOT EXISTS `wp_type_article` (
   `id_type_article` int(11) NOT NULL AUTO_INCREMENT,
   `name_type_article` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -352,6 +379,7 @@ INSERT INTO `wp_type_article` (`id_type_article`, `name_type_article`) VALUES
 -- Estructura de tabla para la tabla `wp_unity`
 --
 
+DROP TABLE IF EXISTS `wp_unity`;
 CREATE TABLE IF NOT EXISTS `wp_unity` (
   `id_unity` int(11) NOT NULL AUTO_INCREMENT,
   `name_unity` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
