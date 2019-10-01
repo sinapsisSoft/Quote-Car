@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        table,
+        th,
+        td {
+            border: 0px;
+        }
+        
+        .table2 {
+            width: 700px;
+            border: solid 1px black;
+            margin: auto;
+            text-align: center;
+        }
+        
+        tfoot {
+            background: black;
+            color: white;
+        }
+        
+        .td-2 {
+            text-align: right;
+            padding: 5px;
+        }
+        
+        .td-3 {
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Cotización N°</h2>
+    <hr>
+
+    <table>
+
+        <tr>
+            <td><b>Cotización N°:</b></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Cliente: </b></td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td><b>Correo:</b></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Teléfono:</b></td>
+            <td></td>
+        </tr>
+    </table>
+    <hr>
+    <table class="table2">
+        <tr>
+            <th>Concesionario</th>
+            <th>Linea</th>
+            <th>Km</th>
+            <th>Modelo</th>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+            <td>80</td>
+        </tr>
+    </table>
+    <table class="table2">
+
+        <tr>
+            <th style="width:550px" class="td-3">Ítems</th>
+            <th></th>
+            <th class="td-2">Costo</th>
+        </tr>
+        <tbody>
+            <tr>
+                <td class="td-3">Eve</td>
+                <td>$</td>
+                <td class="td-2">Jackson</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="text-center">Total</td>
+                <td class="text-right">$</td>
+                <td class="td-2">000</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>

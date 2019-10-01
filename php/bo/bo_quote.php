@@ -97,13 +97,13 @@ class BoQuote
         }
         return json_encode($this->arrayResult);
     }
-    public function selectMP($line,$mp)
+    public function selectMP($line, $mp)
     {
         try {
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                $srtQuery='CALL sp_mp_cost('.$line.','.$mp.')';
+                $srtQuery = 'CALL sp_mp_cost(' . $line . ',' . $mp . ')';
                 if ($result = $con->query($srtQuery)) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;
@@ -123,7 +123,28 @@ class BoQuote
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
-                $srtQuery='CALL sp_mp_cost('.$line.','.$mp.')';
+                $srtQuery = 'CALL sp_mp_cost(' . $line . ',' . $km . ')';
+                if ($result = $con->query($srtQuery)) {
+                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        $this->arrayResult[] = $row;
+                    };
+                    mysqli_free_result($result);
+                }
+            }
+            $con->close();
+        } catch (Exception $e) {
+            echo 'Exception captured: ', $e->getMessage(), "\n";
+        }
+        return json_encode($this->arrayResult);
+    }   
+    public function getQuote($code)
+    {
+        try {
+            $con = $this->objConntion->connect();
+            $con->query("SET NAMES 'utf8'");
+            if ($con != null) {
+                $srtQuery='SELECT QUO.id_line,QUO.id_mp,BOF.name_branch_office,MP.name_mp, LINE.name_line, name_client,mail_client,cellphone_client,model_quote,document_client,code_quote, date_quote FROM wp_quote QUO INNER JOIN wp_city CITY ON QUO.id_city=CITY.id_city INNER JOIN wp_line LINE ON QUO.id_line=LINE.id_line INNER JOIN wp_mp MP ON QUO.id_mp=MP.id_mp INNER JOIN wp_branch_office BOF ON CITY.id_city=BOF.id_city WHERE code_quote="'.$code.'"';
+               // $srtQuery = 'CALL sp_mp_cost(' . $line . ',' . $mp . ')';
                 if ($result = $con->query($srtQuery)) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;
@@ -169,12 +190,14 @@ if (isset($data->POST)) {
 }
 if (isset($data->POST)) {
     if ($data->POST == "MP") {
-        echo $obj->selectMP($data->line,$data->mp);
+        echo $obj->selectMP($data->line, $data->mp);
     }
 
 }
-if ($data->POST == "CREATE") {
-    echo  $obj->sendQuote($data->name, $data->mail, $data->cellphone, $data->line, $data->km, $data->model, $data->doc, $data->city);
+if (isset($data->POST)) {
+    if ($data->POST == "CREATE") {
+        echo $obj->sendQuote($data->name, $data->mail, $data->cellphone, $data->line, $data->km, $data->model, $data->doc, $data->city);
+    }
 }
 
 //echo $obj->selectMP(1,1);
