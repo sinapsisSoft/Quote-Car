@@ -196,9 +196,11 @@ if (isset($data->POST)) {
 }
 if (isset($data->POST)) {
     if ($data->POST == "CREATE") {
-        echo $obj->sendQuote($data->name, $data->mail, $data->cellphone, $data->line, $data->km, $data->model, $data->doc, $data->city);
+        echo $obj->sendQuote($data->name, $data->mail, $data->cellphone, $data->idLine, $data->idMP, $data->model, $data->doc, $data->city);
     }
 }
+
+//echo $obj->sendQuote("Diego","Diego","30234567", 1, 1, "2019", "899989", 1);
 
 //echo $obj->selectMP(1,1);
 //echo "<br>Separador <br>";

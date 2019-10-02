@@ -5,6 +5,7 @@
     //include "../bo/bo_quote.php";
     require "../bo/bo_quote.php";
     header("Content-type: application/json; charset=utf-8");
+    
     if(isset($_GET['Quo_consec'])) {
         $objBo = new BoQuote();
         $Quo_consec = $_GET['Quo_consec'];

@@ -23,11 +23,12 @@ function sendData(idForm, e) {
         loadViewLine();
         loadViewKM();
     }
-    // if (idForm == "form-1") {
-    //     if (sendQuote()) {
-    //     sendMail(); //Aqui se debe enviar el id que retorna sendquote
-    //     }
-    // }
+    if (idForm == "form-1") {
+        sendQuote();
+
+        //     sendMail(); //Aqui se debe enviar el id que retorna sendquote
+
+    }
     e.preventDefault();
 }
 
@@ -54,9 +55,9 @@ function calculateMP(id) {
 
 }
 
-function sendMail(consec) { 
+function sendMail(consec) {
     try {
-        let dataSetQuote = '{"POST":"MAIL","consec":"'+ consec +'",'+ GET_JSON; 
+        let dataSetQuote = '{"POST":"MAIL","consec":"' + consec + '",' + GET_JSON;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "mail/notification.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
@@ -82,24 +83,28 @@ function sendMail(consec) {
 function sendQuote() {
 
     try {
-        let dataSetQuote = '{"POST":"CREATE"' + GET_JSON;
+        let dataSetQuote = '{"POST":"CREATE",' + GET_JSON;
         var xhttp = new XMLHttpRequest();
 
         xhttp.open("POST", "php/bo/bo_quote.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
+
                 let json = JSON.parse(xhttp.responseText);
-                console.log(json);
-                if (xhttp.responseText != 0) {
-                  sendMail(xhttp.responseText);  
-                  // return true;
+
+                if (xhttp.responseText.length != 0 || xhttp.responseText != "") {
+                    sendMail(json[0]["code_quote"]);
+                    // return true;
+                    //console.log(json[0]["code_quote"]);
                 } else {
-                    return false;
+                    //return false;
+                    alert("Se presento un error al crear la cotización");
                 }
             }
         }
         xhttp.send(dataSetQuote);
+
     } catch (error) {
         console.error(error);
         alert("Se presentó un error en el registro");
@@ -295,7 +300,7 @@ function createTable(json) {
     $("#table-result").fadeIn("slow");
     $("#btnSendMail").prop("disabled", false);
     document.getElementById("table-result").innerHTML = thead + tbody + tfoot;
-    GET_JSON = '"name":"' + name + '","mail":"' + mail + '","cellphone":"' + cellphone + '","line":"' + line + '","km":"' + km + '","model":"' + model + '","doc":"' + doc + '","address":"' + address + '","city":"' + city + '"}';
+    GET_JSON = '"idLine":"' + objLine.value + '","idMP":"' + objKm.value + '","name":"' + name + '","mail":"' + mail + '","cellphone":"' + cellphone + '","line":"' + line + '","km":"' + km + '","model":"' + model + '","doc":"' + doc + '","address":"' + address + '","city":"' + city + '"}';
 }
 
 function disabledObj(id) {
