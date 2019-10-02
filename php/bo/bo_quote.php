@@ -124,6 +124,7 @@ class BoQuote
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
                 $srtQuery='CALL sp_create_quote("'.$doc.'","'.$model.'","'.$name.'","'.$mail.'","'.$cellphone.'",'.$line.','.$km.','.$city.')';
+                //echo $srtQuery;
                 if ($result = $con->query($srtQuery)) {
                     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         $this->arrayResult[] = $row;
