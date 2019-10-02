@@ -23,11 +23,11 @@ function sendData(idForm, e) {
         loadViewLine();
         loadViewKM();
     }
-    if (idForm == "form-1") {
-        // if (sendQuote()) {
-        sendMail();
-        // }
-    }
+    // if (idForm == "form-1") {
+    //     if (sendQuote()) {
+    //     sendMail(); //Aqui se debe enviar el id que retorna sendquote
+    //     }
+    // }
     e.preventDefault();
 }
 
@@ -54,9 +54,9 @@ function calculateMP(id) {
 
 }
 
-function sendMail() {
+function sendMail(consec) { 
     try {
-        let dataSetQuote = '{"POST":"MAIL"' + GET_JSON;
+        let dataSetQuote = '{"POST":"MAIL","consec":"'+ consec +'",'+ GET_JSON; 
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "mail/notification.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
@@ -64,10 +64,8 @@ function sendMail() {
             if (this.readyState === 4 && this.status === 200) {
                 console.log(xhttp.responseText);
                 if (xhttp.responseText != 0) {
-
                     alert("Correo enviado con éxito");
                 } else {
-
                     alert("Error al enviar el correo");
                 }
             }
@@ -94,9 +92,9 @@ function sendQuote() {
                 let json = JSON.parse(xhttp.responseText);
                 console.log(json);
                 if (xhttp.responseText != 0) {
-                    return true;
+                  sendMail(xhttp.responseText);  
+                  // return true;
                 } else {
-
                     return false;
                 }
             }

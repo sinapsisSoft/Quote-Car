@@ -14,7 +14,7 @@ include "../dto/dto_connection.php";
                 $objDto = new DtoConnection;
                 $dataConnection = $objDto->getData();
                 $mysqli = new mysqli($dataConnection[0], $dataConnection[1], $dataConnection[2], $dataConnection[3]);                
-                echo"Connected";
+                //echo"Connected";
             } catch (PDOException $e) {
                 die("Error occurred:" . $e->getMessage());
 
@@ -23,8 +23,8 @@ include "../dto/dto_connection.php";
         }
     }
 
-    //$objCon=new Connection();
-    //$objCon->connect();
+    // $objCon=new Connection();
+    // $objCon->connect();
    
     
 ?>

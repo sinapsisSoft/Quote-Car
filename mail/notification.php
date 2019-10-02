@@ -13,6 +13,7 @@ class Notification
     private $to;
     private $cc;
     private $messageContact;
+    private $consec_quo;
 
     public function __construct()
     {
@@ -22,10 +23,11 @@ class Notification
 
     }
 
-    public function __sendUserContact($name, $mail, $cellphone, $line, $km, $model, $doc, $address)
+    public function __sendUserContact($consec, $name, $mail, $cellphone, $line, $km, $model, $doc, $address)
     {
         $this->to = $mail;
         $this->to;
+        $this->consec_quo = $consec;
 
         $this->messageContact = '<p>Plataforma WEB de Cotización APP informa, la creación de una solicitud '
             . '<table>' .
@@ -52,7 +54,9 @@ class Notification
                 $this->headboard .= 'To:' . $this->to . "\r\n";
                 $this->headboard .= 'From:' . $this->from . "\r\n";
                 $this->headboard .= 'Cc:' . $this->cc . "\r\n";
-                $this->message = '<html><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><head><title><b>Solicitud de cotización</b></title></head><body><h5>Cordial saludo,</h5>' . $this->messageContact . '</body></html>';
+                $this->message = '<html><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><head><title><b>Solicitud de cotización</b></title></head><body><h5>Cordial saludo,</h5>' . $this->messageContact . '
+                <a href="http://www.sinapsistechnologies.co/WordPress/php/pdf/quote_pdf.php?Quo_consec='.$this->consec_quo.'">
+                    <img src="http://www.sinapsistechnologies.co/WordPress/img/imgPdf.png" style="height:25px"></a></body></html>';
             break;
         }
 
@@ -73,7 +77,7 @@ if (isset($data->POST)) {
     $mail = new Notification();
 
     if ($data->POST == "MAIL") {
-        $mail->__sendUserContact($data->name, $data->mail, $data->cellphone, $data->line, $data->km, $data->model, $data->doc, $data->address);
+        $mail->__sendUserContact($data->consec, $data->name, $data->mail, $data->cellphone, $data->line, $data->km, $data->model, $data->doc, $data->address);
         $mail->selectHeadboard(0);
         echo $mail->sendMail();
     }
