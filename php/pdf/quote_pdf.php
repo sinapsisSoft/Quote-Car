@@ -81,16 +81,15 @@
                 text-align: left;
                 margin-left: 30px;
             }
-            
             .text-footer {
-                text-align: center;
+                text-align:center;
                 width: 400px;
                 margin: auto;
-                margin-top: auto;
-                margin-top: 60px;
+                margin-top:auto;
+                margin-top:60px;
             }
-            .text-right {
-                text-align: right;
+            .text-right{
+                text-align:right;
             }
         </style>
     </head>
