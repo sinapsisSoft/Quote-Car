@@ -78,6 +78,25 @@ class BoQuote
         }
         return json_encode($this->arrayResult);
     }
+    public function selectQuote()
+    {
+        try {
+            $con = $this->objConntion->connect();
+            $con->query("SET NAMES 'utf8'");
+            if ($con != null) {
+                if ($result = $con->query("CALL sp_quote()")) {
+                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        $this->arrayResult[] = $row;
+                    };
+                    mysqli_free_result($result);
+                }
+            }
+            $con->close();
+        } catch (Exception $e) {
+            echo 'Exception captured: ', $e->getMessage(), "\n";
+        }
+        return json_encode($this->arrayResult);
+    }
     public function selectKM()
     {
         try {
@@ -198,6 +217,11 @@ if (isset($data->POST)) {
 if (isset($data->POST)) {
     if ($data->POST == "CREATE") {
         echo $obj->sendQuote($data->name, $data->mail, $data->cellphone, $data->idLine, $data->idMP, $data->model, $data->doc, $data->city);
+    }
+}
+if (isset($data->POST)) {
+    if ($data->POST == "QUOTE") {
+        echo $obj->selectQuote();
     }
 }
 

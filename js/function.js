@@ -3,8 +3,10 @@ var arrayDealers;
 
 function selectDealers(id) {
     //console.log(arrayDealers);
-    document.getElementById("address").value = arrayDealers[id]["addres_branch_office"];
-    document.getElementById("dealers").value = arrayDealers[id]["name_branch_office"];
+    let idCont = id - 1;
+    document.getElementById("address").value = arrayDealers[idCont]["addres_branch_office"];
+    document.getElementById("dealers").value = arrayDealers[idCont]["name_branch_office"];
+    //console.log(arrayDealers);
 
 }
 
@@ -291,10 +293,10 @@ function createTable(json) {
     tbody += '<tr><th scope="col" class="text-center"colspan="6">Ítems</th><th colspan="2"class="text-center" scope="col">Costo</th></tr>';
     for (let i = 0; i < json.length; i++) {
         cost += parseInt(json[i]["cost_article_mp"]);
-        tbody += '<tr><td colspan="6">' + json[i]["name_article"] + '<td class="text-right">$</td></td><td class="text-right">' + json[i]["cost_article_mp"] + '</td></tr>';
+        tbody += '<tr><td colspan="6">' + json[i]["name_article"] + '<td class="text-right">$</td></td><td class="text-right">' + json[i]["cost_article_mp"].toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '</td></tr>';
     }
     // console.log(json);
-    tfoot = '<tfoot><tr><td colspan="6" class="text-center">Total</td><td class="text-right">$</td><td class="text-right">' + cost + '</td></tr></tfoot>';
+    tfoot = '<tfoot><tr><td colspan="6" class="text-center">Total</td><td class="text-right">$</td><td class="text-right">' + cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '</td></tr></tfoot>';
 
     $("#table-result").removeClass("d-none");
     $("#table-result").fadeIn("slow");

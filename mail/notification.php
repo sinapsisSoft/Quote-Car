@@ -55,7 +55,7 @@ class Notification
                 $this->headboard .= 'From:' . $this->from . "\r\n";
                 $this->headboard .= 'Cc:' . $this->cc . "\r\n";
                 $this->message = '<html><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><head><title><b>Solicitud de cotización</b></title></head><body><h5>Cordial saludo,</h5>' . $this->messageContact . '
-                <a href="http://www.sinapsistechnologies.co/WordPress/php/pdf/quote_pdf.php?Quo_consec='.$this->consec_quo.'">
+                <br><h4>Ver PDF</h4><a href="http://www.sinapsistechnologies.co/WordPress/php/pdf/quote_pdf.php?Quo_consec='.$this->consec_quo.'">
                     <img src="http://www.sinapsistechnologies.co/WordPress/img/imgPdf.png" style="height:25px"></a></body></html>';
             break;
         }
