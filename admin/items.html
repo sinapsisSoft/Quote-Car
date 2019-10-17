@@ -141,6 +141,31 @@
                 <p>This is a great starting point for new custom pages.</p>
 
             </div>
+            <div class="container-fluid">
+
+                <form>
+                    <div class="row">
+
+                        <div class="form-group col-5">
+                            <label for="selectLine">Línea</label>
+                            <select class="custom-select mr-sm-2" id="selectLine">
+                              
+                                  </select>
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="selectMp">Rutina de Mantenimiento</label>
+                            <select class="custom-select mr-sm-2" id="selectMp">
+                             
+                                  </select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="submit"></label>
+                            <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
@@ -193,7 +218,7 @@
     <script src="js/sb-admin.min.js"></script>
     <script src="js/function.js"></script>
     <script>
-        loadViewItem();
+        window.onload = loadItem;
     </script>
 
 

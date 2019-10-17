@@ -30,11 +30,10 @@ function loadViewPageQoute() {
     }
 }
 
-function loadViewItem() {
+function loadItem() {
     loadViewMp();
     loadViewLine();
 }
-
 
 function loadViewMp() {
 
@@ -47,10 +46,10 @@ function loadViewMp() {
             if (this.readyState === 4 && this.status === 200) {
                 let json = JSON.parse(xhttp.responseText);
                 if (xhttp.responseText != 0) {
-                    //alert("Correo enviado con éxito");
-                    //createSelect("city", json, 0);
-                    console.log(json);
-                    //createTable(json);
+
+                    // console.log(json);
+                    createSelect("selectMp", json, 2);
+
                 } else {
 
                     //alert("Error al enviar el correo");
@@ -75,10 +74,10 @@ function loadViewLine() {
             if (this.readyState === 4 && this.status === 200) {
                 let json = JSON.parse(xhttp.responseText);
                 if (xhttp.responseText != 0) {
-                    //alert("Correo enviado con éxito");
-                    //createSelect("city", json, 0);
-                    console.log(json);
-                    //createTable(json);
+
+                    //console.log(json);
+                    createSelect("selectLine", json, 1);
+
                 } else {
 
                     //alert("Error al enviar el correo");
@@ -104,4 +103,20 @@ function createTable(json) {
     document.getElementById("dataTable").innerHTML = thead + tfoot + tbody;
 
 
+}
+
+function createSelect(id, json, type) {
+    var objSelect = document.getElementById(id);
+    let strOption = "<option>Seleccione</option>";
+
+    for (let i = 0; i < json.length; i++) {
+
+        if (type == 1) {
+            strOption += '<option value="' + json[i]["id_line"] + '">' + json[i]["name_line"] + '</option>';
+        } else if (type == 2) {
+            strOption += '<option value="' + json[i]["id_mp"] + '">' + json[i]["name_mp"] + '</option>';
+        }
+    }
+    objSelect.innerHTML = strOption;
+    //console.log(json);
 }

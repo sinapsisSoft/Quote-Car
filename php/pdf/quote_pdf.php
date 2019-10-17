@@ -65,7 +65,7 @@
             }
             
             .text-logo {
-                color: #00AF50;
+                color: #777777;
                 font-weight: bold;
                 font-size: 30px;
                 text-align: center;
@@ -154,7 +154,7 @@
     
             <table>
                 <tr>
-                    <td style='background:#00AF50; font-weight: bold; width: 250px;color: white'>CLIENTE</td>
+                    <td style='background:#777777; font-weight: bold; width: 250px;color: white'>CLIENTE</td>
                 </tr>
                 <tr>
                     <td><b>Cliente: $name</b></td>
@@ -176,21 +176,22 @@
         <table class='table2'>
     
             <tr>
-                <th style='width:500px; background:#00AF50; color: white' class='td-3'>DESCRIPCIÓN</th>
-                <th style=' background:#00AF50; color: white' class='td-3'>CANTIDAD</th>
-                <th style=' background:#00AF50'></th>
-                <th style=' width: 50px; background:#00AF50;text-align:center; color: white'>TOTAL</th>
+                <th style='width:500px; background:#777777; color: white' class='td-3'>DESCRIPCIÓN</th>
+                <th style=' background:#777777; color: white' class='td-3'>CANTIDAD</th>
+                <th style=' background:#777777'></th>
+                <th style=' width: 50px; background:#777777;text-align:center; color: white'>TOTAL</th>
             </tr>
             <tbody>
             ";
             $items="";
             $sumCost=0;
             foreach($jsonArticle as $article){
+                if($article['cost_article_mp']!=""){
                 $sumCost+=$article['cost_article_mp'];
                 $items.="<tr>
-                <td class='td-3'>".$article['name_article']."</td><td>1</td><td>$</td><td class='td-2'>".$article['cost_article_mp']."</td>
+                <td class='td-3'>".$article['name_article']."</td><td>1</td><td>$</td><td class='td-2'>".number_format($article['cost_article_mp'])."</td>
             </tr>";
-          
+        }
             }
             $iva=$sumCost*0.19;  
             $total=$iva+$sumCost;
@@ -199,24 +200,26 @@
                 <tr>
                     <td colspan='2' class='text-right' style='background:gray;color:white'>Sub Total</td>
                     <td class='text-right' style='background:gray;color:white'>$</td>
-                    <td class='td-2' style='background:gray;color:white'>$sumCost</td>
+                    <td class='td-2' style='background:gray;color:white'>".number_format($sumCost)."</td>
                 </tr>
                 <tr>
                     <td colspan='2' class='text-right' style='background:gray;color: white'>IVA 19 %</td>
                     <td class='text-right' style='background:gray;color:white'>$</td>
-                    <td class='td-2' style='background:gray;color:white'>$iva</td>
+                    <td class='td-2' style='background:gray;color:white'>".number_format($iva)."</td>
                 </tr>
     
                 <tr>
                     <td colspan='2' class='text-right' style='background:gray;color:white'>Total</td>
                     <td class='text-right' style='background:gray;color:white'>$</td>
-                    <td class='td-2 ' style='background:gray;color:white'>$total</td>
+                    <td class='td-2 ' style='background:gray;color:white'>".number_format($total)."</td>
                 </tr>
             </tfoot>
         </table>
     
         <div class='footer'>
             <p class='text-footer'>
+                Fecha creación:<b>$date</b><br>
+                Fecha de vigencia:<b>".date("Y-m-d",strtotime($date."+ 30 days"))."</b><br>
                 Todos los precios a cliente son sugeridos. Los precios de mano de obra pueden variar según el taller o ciudad Para más información www.autocom.com.co
             </p>
         </div>";
