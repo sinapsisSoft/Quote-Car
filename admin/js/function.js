@@ -120,3 +120,56 @@ function createSelect(id, json, type) {
     objSelect.innerHTML = strOption;
     //console.log(json);
 }
+
+function getItems(e) {
+    let mp = document.getElementById("selectMp").value;
+    let line = document.getElementById("selectLine").value;
+    //console.log(mp + " " + line);
+
+
+    loadViewMP(mp, line);
+
+    e.preventDefault();
+}
+
+
+
+function loadViewMP(line, mp) {
+
+    try {
+        let dataSetQuote = '{"POST":"MP","line":"' + line + '","mp":"' + mp + '"}';
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "../php/bo/bo_quote.php", true);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let json = JSON.parse(xhttp.responseText);
+                if (xhttp.responseText != 0) {
+                    //console.log(json);
+
+                    createTableEdit(json);
+                } else {
+
+                }
+            }
+        }
+        xhttp.send(dataSetQuote);
+    } catch (error) {
+        console.error(error);
+        alert("Se presentó un error en el registro");
+    }
+}
+
+function createTableEdit(json) {
+    let thead = '<thead><tr><th>Ítem</th><th>Costo</th><th>Acción</th></tr></thead>';
+    let tbody = '<tbody>';
+    let tfoot = ' <tfoot></tfoot> ';
+    for (let i = 0; i < json.length; i++) {
+
+        tbody += '<tr><td>' + json[i]["name_article"] + '</td><td>' + json[i]["cost_article_mp"] + '</td><td><input type="radio" name="items" value="' + json[i]["id_article_mp"] + '"> <i class="fas fa-save"></i></div></td></tr>';
+    }
+    tbody += '</tbody>';
+    document.getElementById("dataTableEdit").innerHTML = thead + tfoot + tbody;
+
+
+}

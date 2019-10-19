@@ -23,8 +23,8 @@ include "../dto/dto_connection.php";
         }
     }
 
-    // $objCon=new Connection();
-    // $objCon->connect();
+     //$objCon=new Connection();
+     //$objCon->connect();
    
     
 ?>

@@ -12,7 +12,11 @@
         /*$this->user="u725020941_WP";
         $this->password="Sinapsis2019*";
         $this->server="localhost";
-        $this->database="u725020941_WP";*/
+        $this->database="u725020941_WP";
+        $this->user="jacmotor";
+        $this->password="FzSFzpF^O$ON";
+        $this->server="localhost";
+        $this->database="jacmotor_wordpress2019";*/
         $this->user="root";
         $this->password="";
         $this->server="localhost";
