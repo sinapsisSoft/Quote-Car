@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Dashboard</title>
+    <title>SB Admin - Ítems</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,7 +33,7 @@
     </button>
 
         <!-- Navbar Search -->
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <!--<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
@@ -42,7 +42,7 @@
           </button>
                 </div>
             </div>
-        </form>
+        </form>-->
 
         <!-- Navbar -->
         <ul class="navbar-nav ml-auto ml-md-0">
@@ -88,7 +88,7 @@
 
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
@@ -105,16 +105,16 @@
                     <a class="dropdown-item" href="register.html">Register</a>
                     <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>-->
 
-                    <a class="dropdown-item" href="#">Usuarios</a>
-                    <a class="dropdown-item" href="#">Ciudades</a>
+                    <a class="dropdown-item" href="users.html">Usuarios</a>
+                    <a class="dropdown-item" href="city.html">Ciudades</a>
                     <div class="dropdown-divider"></div>
                     <h6 class="dropdown-header">Aplicaciones</h6>
                     <!--<a class="dropdown-item" href="404.html">404 Page</a>
                     <a class="dropdown-item" href="blank.html">Blank Page</a>-->
-                    <a class="dropdown-item" href="pages/items/items.html">Ítems</a>
-                    <a class="dropdown-item" href="pages/line/line.html">Líneas</a>
-                    <a class="dropdown-item" href="pages/mp/mp.html">Mantenimientos</a>
-                    <a class="dropdown-item" href="#">Sucursales</a>
+                    <a class="dropdown-item" href="items.html">Ítems</a>
+                    <a class="dropdown-item" href="line.html">Líneas</a>
+                    <a class="dropdown-item" href="Mp.html">Mantenimientos</a>
+                    <a class="dropdown-item" href="branchOffices.html">Sucursales</a>
 
                 </div>
             </li>
@@ -137,9 +137,51 @@
                 <!-- Breadcrumbs-->
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
+                        <a href="index.html">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active">Línea</li>
+                </ol>
+
+                <!-- Page Content -->
+                <h1>Líneas</h1>
+                <hr>
+                <p>Gestión del Líneas.</p>
+
+            </div>
+            <div class="container-fluid">
+
+                <form action="" onsubmit="getItems(event);return false">
+                    <div class="row">
+
+                        <div class="form-group col-5">
+                            <label for="selectLine">Línea</label>
+                            <select class="custom-select mr-sm-2" id="selectLine">
+                              
+                                  </select>
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="selectMp">Rutina de Mantenimiento</label>
+                            <select class="custom-select mr-sm-2" id="selectMp">
+                             
+                                  </select>
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="submit"></label>
+                            <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.container-fluid -->
+            <div class="container-fluid">
+
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
                         <a href="#">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Cotizaciones</li>
+                    <li class="breadcrumb-item active">Overview</li>
                 </ol>
 
                 <!-- Icon Cards-->
@@ -224,20 +266,10 @@
                 <!-- DataTables Example -->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fas fa-table"></i>Cotizaciones</div>
+                        <i class="fas fa-table"></i>Ítem</div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Codigo</th>
-                                        <th>Documento</th>
-                                        <th>Nombre</th>
-                                        <th>Ciudad</th>
-                                        <th>Línea</th>
-                                        <th>Mantenimiento</th>
-                                    </tr>
-                                </thead>
+                            <table class="table table-bordered" id="dataTableEdit" width="100%" cellspacing="0">
                                 <tfoot>
 
                                 </tfoot>
@@ -247,17 +279,24 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    <div class="card-footer small text-muted">
+                        <script type="text/javascript">
+                            var d = new Date();
+                            let intDay = d.getDate();
+                            let intMonth = d.getMonth() + 1;
+                            let intYear = d.getFullYear();
+                            document.write(intDay + "/" + intMonth + "/" + intYear);
+                        </script>
+                    </div>
                 </div>
 
             </div>
             <!-- /.container-fluid -->
-
             <!-- Sticky Footer -->
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <!-- <span>Copyright © Your Website 2019</span>-->
+                        <!--<span>Copyright © Your Website 2019</span>-->
                     </div>
                 </div>
             </footer>
@@ -299,21 +338,13 @@
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="js/demo/datatables-demo.js"></script>
-    <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/function.js"></script>
     <script>
-        window.onload = loadView;
+        window.onload = loadItem;
     </script>
+
 
 </body>
 

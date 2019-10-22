@@ -7,7 +7,7 @@ function loadViewPageQoute() {
     try {
         let dataSetQuote = '{"POST":"QUOTE"}';
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "../php/bo/bo_quote.php", true);
+        xhttp.open("POST", "../../../php/bo/bo_quote.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
@@ -38,7 +38,7 @@ function loadViewMp() {
     try {
         let dataSetQuote = '{"POST":"KM"}';
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "../php/bo/bo_quote.php", true);
+        xhttp.open("POST", "../../../php/bo/bo_quote.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
@@ -66,7 +66,7 @@ function loadViewLine() {
     try {
         let dataSetQuote = '{"POST":"LINE"}';
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "../php/bo/bo_quote.php", true);
+        xhttp.open("POST", "../../../php/bo/bo_quote.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
@@ -137,7 +137,7 @@ function loadViewMP(line, mp) {
     try {
         let dataSetQuote = '{"POST":"MP","line":"' + line + '","mp":"' + mp + '"}';
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "../php/bo/bo_quote.php", true);
+        xhttp.open("POST", "../../../php/bo/bo_quote.php", true);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
