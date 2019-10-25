@@ -67,7 +67,8 @@ function sendMail(consec) {
             if (this.readyState === 4 && this.status === 200) {
                 console.log(xhttp.responseText);
                 if (xhttp.responseText != 0) {
-                    alert("Correo enviado con éxito");
+                    alert("Cotización enviada con éxito");
+                    window.location.assign("https://jacmotors.com.co/Quote-Car/form.html")
                 } else {
                     alert("Error al enviar el correo");
                 }

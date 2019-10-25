@@ -24,10 +24,12 @@ class BoQuote
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
                 if ($result = $con->query("CALL sp_city()")) {
-                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                        $this->arrayResult[] = $row;
+                    while ($row = $result->fetch_assoc()) {
+
+                        $this->arrayResult[] =  array('id_city'=>$row['id_city'],'name_city'=>$row['name_city']); 
+                       
                     };
-                    mysqli_free_result($result);
+                    $result->free();
                 }
             }
             $con->close();
@@ -44,10 +46,10 @@ class BoQuote
             $con->query("SET NAMES 'utf8'");
             if ($con != null) {
                 if ($result = $con->query("CALL sp_branch_office()")) {
-                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                        $this->arrayResult[] = $row;
+                    while ($row = $result->fetch_assoc()) {
+                        $this->arrayResult[] =  array('id_branch_office'=>$row['id_branch_office'],'name_branch_office'=>$row['name_branch_office'],'addres_branch_office'=>$row['addres_branch_office']); 
                     };
-                    mysqli_free_result($result);
+                    $result->free();
                 }
             }
             $con->close();
@@ -64,12 +66,14 @@ class BoQuote
         try {
             $con = $this->objConntion->connect();
             $con->query("SET NAMES 'utf8'");
-            if ($con != null) {
+            if (!$con->connect_errno) {
+                
                 if ($result = $con->query("CALL sp_line()")) {
-                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                        $this->arrayResult[] = $row;
+                    
+                    while ($row = $result->fetch_assoc()) {
+                        $this->arrayResult[] =  array('id_line'=>$row['id_line'],'name_line'=>$row['name_line']); 
                     };
-                    mysqli_free_result($result);
+                    $result->free();
                 }
             }
             $con->close();
@@ -230,4 +234,4 @@ if (isset($data->POST)) {
 //echo $obj->selectMP(1,1);
 //echo "<br>Separador <br>";
 //echo $obj->selectBranchOffice(1);
-//echo $obj->selectLine();
+//echo $obj->selectQuote();

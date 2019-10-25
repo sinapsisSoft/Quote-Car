@@ -18,7 +18,7 @@ class Notification
     public function __construct()
     {
 
-        $this->from = "info@sinapsistechnologies.co";
+        $this->from = "web@jacmotors.com.co";
         $this->cc = "wilpul@gmail.com";
 
     }

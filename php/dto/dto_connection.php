@@ -9,18 +9,18 @@
     private $database;
 
     function __construct(){ 
-        /*$this->user="u725020941_WP";
-        $this->password="Sinapsis2019*";
-        $this->server="localhost";
-        $this->database="u725020941_WP";
-        $this->user="jacmotor";
-        $this->password="FzSFzpF^O$ON";
+       /* $this->user="jacmotor";
+        $this->password="FzSFzpF^O$0N";
         $this->server="localhost";
         $this->database="jacmotor_wordpress2019";*/
-        $this->user="root";
+        $this->user="jacmotor_admin19";
+        $this->password="yp8Q{$UbD2DE";
+        $this->server="localhost";
+        $this->database="jacmotor_wordpress2019";
+        /*$this->user="root";
         $this->password="";
         $this->server="localhost";
-        $this->database="u725020941_wp";
+        $this->database="u725020941_wp";*/
         }
         public function getUser()
         {
